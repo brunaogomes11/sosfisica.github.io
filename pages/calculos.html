@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolução de Sistemas</title>
+    <link rel="stylesheet" href="../css/blocks.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>S.O.S FÍSICA</h1>
+        <div class="menu">
+            <a href="../index.html" class="menuItem" id="tutorial">Tutorial</a>
+            <a class="menuItem active" id="calculadora">Calculadora</a>
+        </div>
+    </header>
+    <select onchange="mudarSistema()" id="sistemSelector">
+        <option value=''>Escolha um sistema</option>
+        <option value="sistema1">Sistema 1</option>
+        <option value="sistema2">Sistema 2</option>
+        <option value="sistema3">Sistema 3</option>
+        <option value="sistema4">Sistema 4</option>
+        <option value="sistema5">Sistema 5</option>
+    </select>
+        <div class="inputContainer" id="quantidadeBlocosSistema1">
+            <label for="qntdSistema">Quantidade de Corpos no sistema (Máximo de blocos visiveis: 200)</label>
+            <input type="number" id="qntdSistema" placeholder="Digite aqui a quantidade"  min='2' onchange="adicionarBlocos()">
+        </div>
+    <div class="containerExplicacao"></div>
+    <div class="containerCalcular">
+        <div id="sistemas">
+                
+        </div>
+        <div class="inputsEntradas">
+        </div>
+        <div class="resultado">
+            
+        </div>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../index.js"></script>
+</body>
+</html>

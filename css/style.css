@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+#quantidadeBlocosSistema1 {
+    display: none;
+}
+
+body {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3a3a3a;
+    padding: 10px 0;
+    color: white;
+}
+
+.menu {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.menuItem {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+}
+
+.active {
+    padding-bottom: 5px;
+    border-bottom: 3px solid #E8EAED;
+}
+
+select{
+    margin: 10px 0;
+    padding: 7px 40px 7px 12px;
+    width: 250px;
+    border: 1px solid #E8EAED;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 1px 3px -2px #9098A9;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 150ms ease;
+    color: #000000;
+}
+
+.buttonsAtritos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+button {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px 5px;
+    width: 100px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4d4d4d;
+}
+
+.imagemSistema {
+    margin: 10px 0;
+    max-width: 20vw;
+    max-height: 40vh;
+}
+
+.containerSistema {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dadosBlocoInput {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.inputsEntradas {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input[type=number] {
+    padding: 5px 10px;
+    border-radius: 15px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+h4 {
+    text-transform: uppercase;
+}
