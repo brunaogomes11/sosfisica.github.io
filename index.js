@@ -121,26 +121,76 @@ function possuirAtrito(opcao, sistema){
     if (opcao == 'Sim' && document.getElementById("coef_atritos") == null) {
         possui_atrito = true
         if (sistema == 'sistema2') {
-            document.querySelector(".inputsEntradas").innerHTML = `
-            <div class="inputContainer" id='coef_atritos'>
-                <label for="coef_atrito_estatico">Coeficiente de Atrito Estático<label>
-                <input type="number" class="dadosBlocoInput" id="coef_atrito_estatico" value='0' min='0' max='1' step='0.1'>
-                <br><label for="coef_atrito_dinamico">Coeficiente de Atrito Dinâmico<label>
-                <input type="number" class="dadosBlocoInput" id="coef_atrito_dinamico" value='0' min='0' max='1' step='0.1'>
-            </div>
-            <div class="inputContainer">
-                <label for="massa1">Massa bloco 1 (Kg)</label>
-                <input type="number" id="massa1" class="dadosBlocoInput" placeholder="Digite aqui a massa"  min='1' step='0.01' required>
-                </div>
-            <div class="inputContainer">
-                <label for="massa2">Massa bloco 2 (Kg)</label>
-                <input type="number" id="massa2" class="dadosBlocoInput" placeholder="Digite aqui a massa"  min='1' step='0.01' required>
-            </div>
-            <div class="inputContainer">
-                <label for="gravidade">Gravidade (m/s²)</label>
-                <input type="number" id="gravidade" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
-            </div>
-            <button class="buttonCalc" onclick="calcularSistema()">Calcular</button>`
+            let coef_atrito_escolhido = ''
+            swal("Escolha o tipo de coeficiente de atrito que deseja inserir\nOBS: Caso selecione",{buttons : {estatico: {
+                text: "Estático",
+                value: "Estático",
+                visible: true,
+                className: "static-bt",
+                closeModal: true,
+              },
+                dinamico: {
+                    text: "Dinâmico",
+                    value: 'Dinâmico',
+                    visible: true,
+                    className: "dinamic-bt",
+                    closeModal: true
+                }
+                }
+            }).then((value) => {
+                switch (value) {
+ 
+                    case "Estático":
+                        coef_atrito_escolhido = "Estático";
+                        swal("Coeficiente Estático Selecionado");
+                        break;
+                    case "Dinâmico":
+                        coef_atrito_escolhido = "Dinâmico";
+                        swal("Coeficiente Dinâmico Selecionado");
+                        break;
+                    default:
+                        swal("Você não selecionou nada");
+                }
+                if (coef_atrito_escolhido == "Estático") { 
+                    document.querySelector(".inputsEntradas").innerHTML = `
+                    <div class="inputContainer" id='coef_atritos'>
+                        <label for="coef_atrito_escolhido">Coeficiente de Atrito Estático<label>
+                        <input type="number" class="dadosBlocoInput" id="coef_atrito_escolhido" value='0' min='0' max='1' step='0.1'>
+                        </div>
+                    <div class="inputContainer">
+                        <label for="massa1">Massa bloco 1 (Kg)</label>
+                        <input type="number" id="massa1" class="dadosBlocoInput" placeholder="Digite aqui a massa"  min='1' step='0.01' required>
+                        </div>
+                    <div class="inputContainer">
+                        <label for="massa2">Massa bloco 2 (Kg)</label>
+                        <input type="number" id="massa2" class="dadosBlocoInput" placeholder="Digite aqui a massa"  min='1' step='0.01' required>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="gravidade">Gravidade (m/s²)</label>
+                        <input type="number" id="gravidade" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                    </div>
+                    <button class="buttonCalc" onclick="calcularSistema()">Calcular</button>`
+                } else if (coef_atrito_escolhido == "Dinâmico") { 
+                    document.querySelector(".inputsEntradas").innerHTML = `
+                    <div class="inputContainer" id='coef_atritos'>
+                        <label for="coef_atrito_dinamico">Coeficiente de Atrito Dinâmico<label>
+                        <input type="number" class="dadosBlocoInput" id="coef_atrito_dinamico" value='0' min='0' max='1' step='0.1'>
+                        </div>
+                    <div class="inputContainer">
+                        <label for="massa1">Massa bloco 1 (Kg)</label>
+                        <input type="number" id="massa1" class="dadosBlocoInput" placeholder="Digite aqui a massa"  min='1' step='0.01' required>
+                        </div>
+                    <div class="inputContainer">
+                        <label for="massa2">Massa bloco 2 (Kg)</label>
+                        <input type="number" id="massa2" class="dadosBlocoInput" placeholder="Digite aqui a massa"  min='1' step='0.01' required>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="gravidade">Gravidade (m/s²)</label>
+                        <input type="number" id="gravidade" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                    </div>
+                    <button class="buttonCalc" onclick="calcularSistema()">Calcular</button>`
+                }
+            });
         } else if (sistema == "sistema4") {
             document.querySelector(".inputsEntradas").innerHTML = `
             <div class="inputContainer" id='coef_atritos'>

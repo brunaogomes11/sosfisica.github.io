@@ -128,3 +128,21 @@ input[type=number] {
 h4 {
     text-transform: uppercase;
 }
+
+.dinamic-bt {
+    background-color: #008cff;
+    text-align: center;
+    padding: 10px 5px;
+}
+.static-bt {
+    background-color: #008cff;
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.swal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
