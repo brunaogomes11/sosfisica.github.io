@@ -122,7 +122,7 @@ function possuirAtrito(opcao, sistema){
         possui_atrito = true
         if (sistema == 'sistema2') {
             let coef_atrito_escolhido = ''
-            swal("Escolha o tipo de coeficiente de atrito que deseja inserir\nOBS: Caso selecione",{buttons : {estatico: {
+            swal("Escolha o tipo de coeficiente de atrito que deseja inserir\nOBS: Caso selecione apenas a estática, o coeficiente dinâmico será 10% menor\nCaso selecione apenas o dinâmico, será 10% maior",{buttons : {estatico: {
                 text: "Estático",
                 value: "Estático",
                 visible: true,
@@ -136,7 +136,7 @@ function possuirAtrito(opcao, sistema){
                     className: "dinamic-bt",
                     closeModal: true
                 }
-                }
+            }
             }).then((value) => {
                 switch (value) {
  
