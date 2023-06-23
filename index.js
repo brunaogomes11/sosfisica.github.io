@@ -367,8 +367,19 @@ function calcularMassasPAPG(progressao) {
                 swal(`Massa do bloco ${i} inválida`);
             }
         }
-        
-        console.log(corposSistema)
+        document.querySelector(".inputsEntradas").innerHTML += `
+        <div class="inputContainer">
+            <label for="forca">Força aplicada (N)</label>
+            <input type="number" id="forca" class="dadosBlocoInput" placeholder="Digite aqui a força"  min='0' required>
+        </div>
+        <div class="inputContainer">
+            <label for="gravidade">Gravidade (m/s²)</label>
+            <input type="number" id="gravidade" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+        </div>
+        <button class="buttonCalc" onclick="calcularSistema()">Calcular</button>
+        `
+        document.querySelector("#primeiro_termo").value = primeiro_termo
+        document.querySelector("#razao").value = razao
     } else if (progressao == 'pg') {
         if (progressao == "pa") {
             corpo = {
@@ -429,7 +440,28 @@ function calcularSistema() {
     let n_sistema = document.querySelector('#sistemSelector').value
     
     if(possui_atrito == false) {
-        if (n_sistema == 'sistema2') {
+        if (n_sistema == 'sistema1') {
+            let soma_massas = 0
+            let quantidade_blocos = document.querySelector("#qntdSistema").value
+            let gravidade = Number(document.querySelector(`#gravidade`).value)
+            let forca = Number(document.querySelector(`#forca`).value)
+            if (gravidade > 0 && forca > 0) {
+                for(let i = 0; i < quantidade_blocos; i++) {
+                    soma_massas += Number(corposSistema[i]['Massa'])
+                }
+                let aceleracao = forca/soma_massas
+                document.querySelector(".resultado").innerHTML = `
+                    <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
+                    
+                `
+            } else if (gravidade <= 0 && forca <= 0) {
+                swal("Força e gravidade inválidas")
+            } else if (gravidade <= 0) {
+                swal("Gravidade inválida")
+            } else if (forca <= 0) {
+                swal("Força inválida")
+            } 
+        } else if (n_sistema == 'sistema2') {
             let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
             let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
             let gravidade = Number(document.querySelector(`#gravidade`).value)
