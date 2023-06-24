@@ -11,7 +11,6 @@ function mudarSistema() {
         document.querySelector("#quantidadeBlocosSistema1").style.display = 'none'
         document.querySelector("#sistemas").innerHTML = `<div class="containerSistema">
             <img src='../imagens/sistema2.png' class="imagemSistema">
-            <p>o bloco 1 de massaé puxado pelo bloco 2 de massa</p>
         </div>
         <h4>Agora escolha se haverá atrito no sistema</h4>
         <div class='buttonsAtritos'>
@@ -365,7 +364,6 @@ function possuirAtrito(opcao, sistema){
             }
             }).then((value) => {
                 switch (value) {
-    
                     case "Estático":
                         coef_atrito_escolhido = "Estático";
                         swal("Coeficiente Estático Selecionado");
