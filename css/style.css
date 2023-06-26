@@ -126,6 +126,7 @@ input[type=number] {
 }
 
 h4 {
+    text-align: center;
     text-transform: uppercase;
 }
 
@@ -147,7 +148,7 @@ h4 {
     align-items: center;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 890px) {
     .imagemSistema {
         margin: 10px 0;
         max-width: 70vw;
