@@ -1,7 +1,10 @@
 let possui_atrito = false
+let coef_atrito_escolhido = ''
 function mudarSistema() {
     document.querySelector(".inputsEntradas").innerHTML = ``
     document.querySelector(".resultado ").innerHTML = ``
+    possui_atrito = false
+    coef_atrito_escolhido = ''
     if (document.querySelector('#sistemSelector').value == 'sistema1') {
         document.querySelector("#sistemas").innerHTML = `<div class="containerSistema">
             <h3>Mude a quantidade de blocos para aparecer o sistema</h3>
@@ -121,8 +124,7 @@ function possuirAtrito(opcao, sistema){
     if (opcao == 'Sim' && document.getElementById("coef_atritos") == null) {
         possui_atrito = true
         if (sistema == 'sistema2') {
-            let coef_atrito_escolhido = ''
-            swal("Escolha o tipo de coeficiente de atrito que deseja inserir\nOBS: Caso selecione apenas a estática, o coeficiente dinâmico será 10% menor\nCaso selecione apenas o dinâmico, será 10% maior",{buttons : {estatico: {
+            swal("Escolha o tipo de coeficiente de atrito que deseja inserir\nOBS: Caso selecione apenas a estática, o coeficiente dinâmico será 10% menor\nCaso selecione apenas o dinâmico, o estático será 10% maior",{buttons : {estatico: {
                 text: "Estático",
                 value: "Estático",
                 visible: true,
@@ -809,9 +811,22 @@ function calcularSistema() {
             `
         }
     } else if (possui_atrito == true) {
+        let coef_atrito_estatico = 0
+        let coef_atrito_dinamico = 0
+        if (coef_atrito_escolhido == "Estático") {
+            coef_atrito_estatico = Number(document.querySelector(`#coef_atrito_estatico`).value)
+            coef_atrito_dinamico = (coef_atrito_estatico*0.10)+coef_atrito_estatico
+        } else if (coef_atrito_escolhido == "Dinâmico") {
+            coef_atrito_dinamico = Number(document.querySelector(`#coef_atrito_dinamico`).value)
+            coef_atrito_estatico = (coef_atrito_dinamico*0.10)+coef_atrito_dinamico
+        } else if (coef_atrito_escolhido == "Ambos") {
+            coef_atrito_dinamico = Number(document.querySelector(`#coef_atrito_dinamico`).value)
+            coef_atrito_estatico = Number(document.querySelector(`#coef_atrito_estatico`).value)
+        }
+        if (n_sistema == 'sistema2') {
+
+        }
         if (n_sistema == 'sistema5') {
-            let coef_atrito_estatico = Number(document.querySelector(`#coef_atrito_estatico`).value)
-            let coef_atrito_dinamico = Number(document.querySelector(`#coef_atrito_dinamico`).value)
             let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
             let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
             let massa_bloco_3 = Number(document.querySelector(`#massa3`).value)

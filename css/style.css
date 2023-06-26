@@ -146,3 +146,11 @@ h4 {
     justify-content: center;
     align-items: center;
 }
+
+@media screen and (max-width: 800px) {
+    .imagemSistema {
+        margin: 10px 0;
+        max-width: 70vw;
+        max-height: 50vh;
+    }
+  }
