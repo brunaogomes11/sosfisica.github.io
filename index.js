@@ -742,8 +742,9 @@ function calcularSistema() {
                     <div class="tracoes_container">
                         <p>Escolha um bloco que deseja ver a(s) força(s) de tração aplicadas nele.</p>
                         <div class="inputContainer">
-                            <label for="primeiro_termo">Tração no Bloco</label>
-                            <input type="number" id="primeiro_termo">
+                            <label for="tracao_bloco_n">Tração no Bloco</label>
+                            <input type="number" id="tracao_bloco_n">
+                            <button onclick="calcularTracaoSistema1()" class="buttonCalc">Sim</button>
                         </div>
                     </div>
                 `
