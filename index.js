@@ -874,7 +874,7 @@ function calcularSistema() {
                             <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
                         `
                     }
-                } else if (massa_bloco_1 <= 0 || massa_bloco_2 <= 0 || massa_bloco_3 <= 0 || gravidade <= 0 || forca <= 0 ){
+                } else if (massa_bloco_1 <= 0 || massa_bloco_2 <= 0 && gravidade <= 0  ){
                     swal("Alguma entrada está inválida!\nPor favor procure qual das entradas é menor ou igual a 0 e corrija-a")
                 }
             }
