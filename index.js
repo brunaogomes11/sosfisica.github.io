@@ -850,6 +850,7 @@ function calcularSistema() {
                 }
             }
             if (continuar == true) {
+                let angulo = Number(document.querySelector(`#angulo`).value)
                 let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
                 let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
                 let gravidade = Number(document.querySelector(`#gravidade`).value)
