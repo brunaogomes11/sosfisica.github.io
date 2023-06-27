@@ -907,7 +907,6 @@ function calcularSistema() {
                 let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
                 let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
                 let gravidade = Number(document.querySelector(`#gravidade`).value)
-                let forca = Number(document.querySelector(`#forca`).value)
                 let angulo = Number(document.querySelector(`#angulo`).value)
                 if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && massa_bloco_3 > 0 && gravidade > 0 && forca > 0 ) {
                     let peso_n_bloco_1 = massa_bloco_1*gravidade*Math.cos(angulo)
