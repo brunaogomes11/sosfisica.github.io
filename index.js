@@ -878,6 +878,71 @@ function calcularSistema() {
                     swal("Alguma entrada está inválida!\nPor favor procure qual das entradas é menor ou igual a 0 e corrija-a")
                 }
             }
+        } else if (n_sistema == 'sistema4') {
+            let coef_atrito_estatico = 0
+            let coef_atrito_dinamico = 0
+            if (!document.getElementById('coef_atrito_dinamico') && document.getElementById('coef_atrito_estatico')) {
+                coef_atrito_estatico = Number(document.querySelector(`#coef_atrito_estatico`).value)
+                coef_atrito_dinamico = coef_atrito_estatico-(coef_atrito_estatico*0.10)
+                continuar = true
+            } else if (document.getElementById('coef_atrito_dinamico') && !document.getElementById('coef_atrito_estatico')) {
+                coef_atrito_dinamico = Number(document.querySelector(`#coef_atrito_dinamico`).value)
+                coef_atrito_estatico = (coef_atrito_dinamico*0.10)+coef_atrito_dinamico
+                continuar = true
+            } else if (document.getElementById('coef_atrito_dinamico') && document.getElementById('coef_atrito_estatico')) {
+                coef_atrito_dinamico = Number(document.querySelector(`#coef_atrito_dinamico`).value)
+                coef_atrito_estatico = Number(document.querySelector(`#coef_atrito_estatico`).value)
+                if (coef_atrito_dinamico > 0) {
+                    if (coef_atrito_dinamico >= coef_atrito_estatico) {
+                        swal("O coeficiente de atrito dinâmico não pode ser maior ou igual que o estático")
+                        continuar = false
+                    } else {
+                        continuar = true
+                    }
+
+                }
+            }
+            if (continuar == true) {
+                let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
+                let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
+                let gravidade = Number(document.querySelector(`#gravidade`).value)
+                let forca = Number(document.querySelector(`#forca`).value)
+                if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && massa_bloco_3 > 0 && gravidade > 0 && forca > 0 ) {
+                    let peso_n_bloco_1 = massa_bloco_1*gravidade*Math.cos(angulo)
+                    let peso_t_bloco_1 = massa_bloco_1*gravidade*Math.sin(angulo)
+                    let peso_bloco_2 = massa_bloco_2*gravidade
+                    let forca_atrito_estatico_maxA = coef_atrito_estatico*(peso_n_bloco_1)
+                    let aceleracao = 0
+                    let tracao = 0
+                    if ((peso_t_bloco_1+forca_atrito_estatico_maxA) > peso_bloco_2) {
+                        forca_atrito_dinamico = coef_atrito_dinamico*peso_n_bloco_1
+                        aceleracao = (peso_t_bloco_1-forca_atrito_dinamico_total-peso_bloco_2)/(massa_bloco_1+massa_bloco_2)
+                        tracao = peso_bloco_2+(massa_bloco_2*aceleracao)
+                        document.querySelector(".resultado").innerHTML = `
+                            <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
+                            <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
+                        `
+                    } else if (peso_bloco_2 < (peso_t_bloco_1+forca_atrito_estatico_maxA)) {
+                        forca_atrito_dinamico = coef_atrito_dinamico*peso_n_bloco_1
+                        aceleracao = (peso_bloco_2-forca_atrito_dinamico_total-peso_t_bloco_1)/(massa_bloco_1+massa_bloco_2)
+                        tracao = peso_bloco_2+(massa_bloco_2*aceleracao)
+                        document.querySelector(".resultado").innerHTML = `
+                            <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
+                            <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
+                        `
+                    } else if (peso_bloco_2 == (peso_t_bloco_1+forca_atrito_estatico_maxA)) {
+                        swal("O sistema está em repouso!")
+                        aceleracao = 0
+                        tracao = 0
+                        document.querySelector(".resultado").innerHTML = `
+                            <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
+                            <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
+                        `
+                    }
+                } else if (massa_bloco_1 <= 0 || massa_bloco_2 <= 0 && gravidade <= 0  ){
+                    swal("Alguma entrada está inválida!\nPor favor procure qual das entradas é menor ou igual a 0 e corrija-a")
+                }
+            }
         } else if (n_sistema == 'sistema5') {
             let coef_atrito_estatico = 0
             let coef_atrito_dinamico = 0
