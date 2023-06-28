@@ -123,7 +123,122 @@ function possuirAtrito(opcao, sistema){
     let quantidade_blocos = document.querySelector("#qntdSistema").value
     if (opcao == 'Sim') {
         possui_atrito = true
-        if (sistema == 'sistema2') {
+        if (sistema == 'sistema1') {
+            swal("Escolha o tipo de coeficiente de atrito que deseja inserir\nOBS: Caso selecione apenas a estática, o coeficiente dinâmico será 10% menor\nCaso selecione apenas o dinâmico, o estático será 10% maior",{buttons : {estatico: {
+                text: "Estático",
+                value: "Estático",
+                visible: true,
+                className: "static-bt",
+                closeModal: true,
+              },
+                dinamico: {
+                    text: "Dinâmico",
+                    value: 'Dinâmico',
+                    visible: true,
+                    className: "dinamic-bt",
+                    closeModal: true
+                },
+                ambos: {
+                    text: "Ambos",
+                    value: 'Ambos',
+                    visible: true,
+                    className: "dinamic-bt",
+                    closeModal: true
+                }
+            }
+            }).then((value) => {
+                switch (value) {
+                    case "Estático":
+                        coef_atrito_escolhido = "Estático";
+                        swal("Coeficiente Estático Selecionado");
+                        break;
+                    case "Dinâmico":
+                        coef_atrito_escolhido = "Dinâmico";
+                        swal("Coeficiente Dinâmico Selecionado");
+                        break;
+                    case "Ambos":
+                        coef_atrito_escolhido = "Ambos";
+                        swal("Coeficiente Dinâmico e Estático Selecionados");
+                        break;
+                    default:
+                        swal("Você não selecionou nada");
+                }
+                const inputsContainer = document.querySelector(".inputsEntradas");
+                const existingInputs = inputsContainer.querySelector("#coef_atritos");
+                if (existingInputs) {
+                    existingInputs.remove();
+                }
+                const forcaInput = inputsContainer.querySelector("#forca");
+                const gravidadeInput = inputsContainer.querySelector("#gravidade");
+                if (forcaInput) {
+                    forcaInput.parentNode.remove();
+                }
+                if (gravidadeInput) {
+                    gravidadeInput.parentNode.remove();
+                }
+
+                // Verificar se o botão de calcular existe e removê-lo
+                const buttonCalc = inputsContainer.querySelector("#buttonCalcularSistema1");
+                if (buttonCalc) {
+                    buttonCalc.remove();
+                }
+                if (coef_atrito_escolhido == "Estático") {
+                    document.querySelector(".inputsEntradas").innerHTML += `
+                    <div class="inputContainer" id='coef_atritos'>
+                        <label for="coef_atrito_escolhido">Coeficiente de Atrito Estático<label>
+                        <input type="number" class="dadosBlocoInput" id="coef_atrito_escolhido" value='0' min='0' max='1' step='0.1'>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="forca">Força (N)</label>
+                        <input type="number" id="forca" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="gravidade">Gravidade (m/s²)</label>
+                        <input type="number" id="gravidade" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                    </div>
+                    <button class="buttonCalc" onclick="calcularSistema()" id='buttonCalcularSistema1'>Calcular</button>`
+                } else if (coef_atrito_escolhido == "Dinâmico") { 
+                    document.querySelector(".inputsEntradas").innerHTML += `
+                    <div class="inputContainer" id='coef_atritos'>
+                        <label for="coef_atrito_dinamico">Coeficiente de Atrito Dinâmico<label>
+                        <input type="number" class="dadosBlocoInput" id="coef_atrito_dinamico" value='0' min='0' max='1' step='0.1'>
+                        </div>
+                    <div class="inputContainer">
+                        <label for="forca">Força (N)</label>
+                        <input type="number" id="forca" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="gravidade">Gravidade (m/s²)</label>
+                        <input type="number" id="gravidade" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                    </div>
+                    <button class="buttonCalc" onclick="calcularSistema()" id='buttonCalcularSistema1'>Calcular</button>`
+                } else if (coef_atrito_escolhido == "Ambos") { 
+                    document.querySelector(".inputsEntradas").innerHTML += `
+                    <div class="inputContainer" id='coef_atritos'>
+                        <div class="inputContainer">
+                            <label for="coef_atrito_estatico">Coeficiente de Atrito Estático<label>
+                            <input type="number" class="dadosBlocoInput" id="coef_atrito_estatico" value='0' min='0' max='1' step='0.1'>
+                        </div>
+                        <div class="inputContainer">
+                            <label for="coef_atrito_dinamico">Coeficiente de Atrito Dinâmico<label>
+                            <input type="number" class="dadosBlocoInput" id="coef_atrito_dinamico" value='0' min='0' max='1' step='0.1'>
+                        </div>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="forca">Força (N)</label>
+                        <input type="number" id="forca" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                    </div>
+                    <div class="inputContainer">
+                        <label for="gravidade">Gravidade (m/s²)</label>
+                        <input type="number" id="gravidade" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                    </div>
+                    <button class="buttonCalc" onclick="calcularSistema()" id='buttonCalcularSistema1'>Calcular</button>`
+                }
+                for(i = 0; i < quantidade_blocos; i++) {
+                    document.querySelector(`#massa${i+1}`).value = corposSistema[i]['Massa']
+                }
+            });
+        } else if (sistema == 'sistema2') {
             swal("Escolha o tipo de coeficiente de atrito que deseja inserir\nOBS: Caso selecione apenas a estática, o coeficiente dinâmico será 10% menor\nCaso selecione apenas o dinâmico, o estático será 10% maior",{buttons : {estatico: {
                 text: "Estático",
                 value: "Estático",
@@ -480,6 +595,40 @@ function possuirAtrito(opcao, sistema){
         }
     } else if (opcao == 'Não'){
         possui_atrito = false
+        if (sistema == 'sistema1') {
+            const inputsContainer = document.querySelector(".inputsEntradas");
+            const existingInputs = inputsContainer.querySelector("#coef_atritos");
+            if (existingInputs) {
+                existingInputs.remove();
+            }
+            const forcaInput = inputsContainer.querySelector("#forca");
+            const gravidadeInput = inputsContainer.querySelector("#gravidade");
+            if (forcaInput) {
+                forcaInput.parentNode.remove();
+            }
+            if (gravidadeInput) {
+                gravidadeInput.parentNode.remove();
+            }
+
+            // Verificar se o botão de calcular existe e removê-lo
+            const buttonCalc = inputsContainer.querySelector("#buttonCalcularSistema1");
+            if (buttonCalc) {
+                buttonCalc.remove();
+            }
+            document.querySelector(".inputsEntradas").innerHTML += `
+                <div class="inputContainer">
+                    <label for="forca">Força (N)</label>
+                    <input type="number" id="forca" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                </div>
+                <div class="inputContainer">
+                    <label for="gravidade">Gravidade (m/s²)</label>
+                    <input type="number" id="gravidade" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
+                </div>
+                <button class="buttonCalc" onclick="calcularSistema()" id='buttonCalcularSistema1'>Calcular</button>`
+            for(i = 0; i < quantidade_blocos; i++) {
+                document.querySelector(`#massa${i+1}`).value = corposSistema[i]['Massa']
+            }
+        }
         if (sistema == 'sistema2') {
             document.querySelector(".inputsEntradas").innerHTML = `
             <div class="inputContainer">
@@ -653,19 +802,15 @@ function calcularMassasPAPG(progressao) {
                 swal(`Massa do bloco ${i} inválida`);
             }
         }
-        document.querySelector(".inputsEntradas").innerHTML += `
-        <div class="inputContainer">
-            <label for="forca">Força aplicada (N)</label>
-            <input type="number" id="forca" class="dadosBlocoInput" placeholder="Digite aqui a força"  min='0' required>
-        </div>
-        <div class="inputContainer">
-            <label for="gravidade">Gravidade (m/s²)</label>
-            <input type="number" id="gravidade" class="dadosBlocoInput" placeholder="Digite aqui a gravidade"  min='0' required>
-        </div>
-        <button class="buttonCalc" onclick="calcularSistema()">Calcular</button>
-        `
-        document.querySelector("#primeiro_termo").value = primeiro_termo
         document.querySelector("#razao").value = razao
+        document.querySelector("#primeiro_termo").value = primeiro_termo
+        if (document.getElementById("buttonAtritoSim") == null) {
+            document.querySelector(".inputsEntradas").innerHTML += `
+            <h4>Agora escolha se haverá atrito no sistema</h4>
+            <div class='buttonsAtritos'>
+            <button onclick="possuirAtrito('Sim', 'sistema1')" id="buttonAtritoSim">Sim</button>
+            <button onclick="possuirAtrito('Não', 'sistema1')" id="buttonAtritoNao">Não</button></div>`
+        }
     } else if (progressao == 'pg') {
         if (progressao == "pa") {
             corpo = {
@@ -686,6 +831,13 @@ function calcularMassasPAPG(progressao) {
                     swal(`Massa do bloco ${i} inválida`);
                 }
             }
+            if (document.getElementById("buttonAtritoSim") == null) {
+                document.querySelector(".inputsEntradas").innerHTML += `
+                <h4>Agora escolha se haverá atrito no sistema</h4>
+                <div class='buttonsAtritos'>
+                <button onclick="possuirAtrito('Sim', 'sistema1')" id="buttonAtritoSim">Sim</button>
+                <button onclick="possuirAtrito('Não', 'sistema1')" id="buttonAtritoNao">Não</button></div>`
+            }
         }
     }
 }
@@ -704,7 +856,6 @@ function adicionarDadosBlocosManualmente() {
                 "Massa": massa_bloco_atual
             }
             corposSistema.push(corpo)
-            document.querySelector(`#massa${i}`).value = massa_bloco_atual
         } else {
             swal(`Massa do bloco ${i} inválida`);
             pode_continuar = false;
@@ -715,8 +866,11 @@ function adicionarDadosBlocosManualmente() {
             document.querySelector(".inputsEntradas").innerHTML += `
             <h4>Agora escolha se haverá atrito no sistema</h4>
             <div class='buttonsAtritos'>
-            <button onclick="possuirAtrito('Sim')" id="buttonAtritoSim">Sim</button>
-            <button onclick="possuirAtrito('Não')" id="buttonAtritoNao">Não</button></div>`
+            <button onclick="possuirAtrito('Sim', 'sistema1')" id="buttonAtritoSim">Sim</button>
+            <button onclick="possuirAtrito('Não', 'sistema1')" id="buttonAtritoNao">Não</button></div>`
+        }
+        for(i = 0; i < quantidade_blocos; i++) {
+            document.querySelector(`#massa${i+1}`).value = corposSistema[i]['Massa']
         }
     } else {
         corposSistema = []
@@ -908,25 +1062,27 @@ function calcularSistema() {
                 let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
                 let gravidade = Number(document.querySelector(`#gravidade`).value)
                 let angulo = Number(document.querySelector(`#angulo`).value)
-                if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && massa_bloco_3 > 0 && gravidade > 0 && forca > 0 ) {
-                    let peso_n_bloco_1 = massa_bloco_1*gravidade*Math.cos(angulo)
-                    let peso_t_bloco_1 = massa_bloco_1*gravidade*Math.sin(angulo)
+                if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && gravidade > 0) {
+                    let peso_n_bloco_1 = massa_bloco_1*gravidade*Math.cos(angulo*(Math.PI / 180))
+                    let peso_t_bloco_1 = massa_bloco_1*gravidade*Math.sin(angulo*(Math.PI / 180))
                     let peso_bloco_2 = massa_bloco_2*gravidade
                     let forca_atrito_estatico_maxA = coef_atrito_estatico*(peso_n_bloco_1)
                     let aceleracao = 0
                     let tracao = 0
-                    if ((peso_t_bloco_1+forca_atrito_estatico_maxA) > peso_bloco_2) {
+                    if (peso_bloco_2 < (peso_t_bloco_1+forca_atrito_estatico_maxA) && peso_t_bloco_1 > forca_atrito_estatico_maxA) {
                         forca_atrito_dinamico = coef_atrito_dinamico*peso_n_bloco_1
-                        aceleracao = (peso_t_bloco_1-forca_atrito_dinamico_total-peso_bloco_2)/(massa_bloco_1+massa_bloco_2)
+                        aceleracao = (peso_t_bloco_1-forca_atrito_dinamico-peso_bloco_2)/(massa_bloco_1+massa_bloco_2)
                         tracao = peso_bloco_2+(massa_bloco_2*aceleracao)
+                        swal(`Bloco 1 descendo`)
                         document.querySelector(".resultado").innerHTML = `
                             <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
                             <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
                         `
-                    } else if (peso_bloco_2 < (peso_t_bloco_1+forca_atrito_estatico_maxA)) {
+                    } else if (peso_bloco_2 > (peso_t_bloco_1+forca_atrito_estatico_maxA) && peso_t_bloco_1 > forca_atrito_estatico_maxA) {
                         forca_atrito_dinamico = coef_atrito_dinamico*peso_n_bloco_1
-                        aceleracao = (peso_bloco_2-forca_atrito_dinamico_total-peso_t_bloco_1)/(massa_bloco_1+massa_bloco_2)
+                        aceleracao = (peso_bloco_2-forca_atrito_dinamico-peso_t_bloco_1)/(massa_bloco_1+massa_bloco_2)
                         tracao = peso_bloco_2+(massa_bloco_2*aceleracao)
+                        swal(`Bloco 2 descendo`)
                         document.querySelector(".resultado").innerHTML = `
                             <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
                             <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>

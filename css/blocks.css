@@ -9,6 +9,12 @@
   overflow-x: auto;
 }
 
+.containerSistema1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .block {
   width: 100px;
   min-width: 100px;
