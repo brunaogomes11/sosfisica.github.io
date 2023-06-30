@@ -11,6 +11,7 @@ function mudarSistema() {
             <h3>Mude a quantidade de blocos para aparecer o sistema</h3>
         </div>`        
         document.querySelector("#quantidadeBlocosSistema1").style.display = 'block'
+        explicacaoSistemas('sistema1')
     } else if (document.querySelector('#sistemSelector').value == 'sistema2') {
         document.querySelector("#quantidadeBlocosSistema1").style.display = 'none'
         document.querySelector("#sistemas").innerHTML = `<div class="containerSistema">
@@ -68,8 +69,8 @@ function mudarSistema() {
 }
 
 function adicionarBlocos() {
-    let quantidade_blocos = document.querySelector("#qntdSistema").value
-    if (quantidade_blocos >= 2) {
+    let quantidade_blocos = Number(document.querySelector("#qntdSistema").value)
+    if (quantidade_blocos >= 2 && Number.isInteger(quantidade_blocos)) {
         if (document.querySelector('#sistemSelector').value != '') {
             document.querySelector("#sistemas").innerHTML = `<div class="containerSistema1">
                 <div class="containerBlocos">
@@ -780,7 +781,7 @@ function inputsPAPG() {
         <option value="pa">Progressão Aritmética</option>`
         document.querySelector(".inputsEntradas").innerHTML += `
         <div class="inputContainer">
-            <label for="primeiro_termo">Primeiro Termo</label>
+            <label for="primeiro_termo">Massa do Primeiro Bloco</label>
             <input type="number" id="primeiro_termo">
         </div>
         <div class="inputContainer">
@@ -1173,7 +1174,7 @@ function calcularSistema() {
                     } else if (peso_bloco_2 == peso_t_bloco_1) {
                         swal("O sistema está em repouso!")
                         aceleracao = 0
-                        tracao = 0
+                        tracao = peso_bloco_2
                         document.querySelector(".resultado").innerHTML = `
                             <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
                             <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
@@ -1263,6 +1264,6 @@ function calcularTracaoSistema1(aceleracao) {
 }
 function explicacaoSistemas(sistema) {
     if (sistema == 'sistema1') {
-
+        swal("Sistema 1 faz isso assim assado")
     }
 }
