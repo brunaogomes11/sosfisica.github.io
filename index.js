@@ -70,6 +70,7 @@ function mudarSistema() {
 
 function adicionarBlocos() {
     let quantidade_blocos = Number(document.querySelector("#qntdSistema").value)
+    let quantidade_blocos_se_invalido = (quantidade_blocos >= 2) ? quantidade_blocos : 2
     if (quantidade_blocos >= 2 && Number.isInteger(quantidade_blocos)) {
         if (document.querySelector('#sistemSelector').value != '') {
             document.querySelector("#sistemas").innerHTML = `<div class="containerSistema1">
@@ -88,7 +89,6 @@ function adicionarBlocos() {
                             <div class="block" id="block${i}">${i}</div>`
                     }
                 }
-                
                 document.querySelector(".containerBlocos").innerHTML += `
                     <div class="rope"></div>
                     <h3>F</h3>`
@@ -107,7 +107,9 @@ function adicionarBlocos() {
             }
         }
     } else {
-        swal("Quantidade inválida")
+        swal("Quantidade inválida, adotando a quantidade como 2")
+        document.querySelector("#qntdSistema").value = quantidade_blocos_se_invalido
+        adicionarBlocos()
     }
 }
 
@@ -722,6 +724,9 @@ function possuirAtrito(opcao, sistema){
 }
 
 function entradaManual(opcao) {
+    if (document.querySelector(".resultado ")) {
+        document.querySelector(".resultado ").innerHTML = ``
+    }
     let quantidade_blocos = document.querySelector("#qntdSistema").value
     if (opcao == 'Sim' && quantidade_blocos > 5) {
         swal("Impossível adicionar as massas com essa quantidade de blocos ")
@@ -750,6 +755,9 @@ function entradaManual(opcao) {
 }
 
 function inputsPAPG() {
+    if (document.querySelector(".resultado ")) {
+        document.querySelector(".resultado ").innerHTML = ``
+    }
     progressao = document.getElementById('tipoPAPG').value
     criarBotoes()   
     document.querySelector(".inputsEntradas").innerHTML += `
@@ -1255,12 +1263,16 @@ function calcularSistema() {
 
 function calcularTracaoSistema1(aceleracao) {
     blocoEscolhido = document.querySelector("#tracao_bloco_n").value
-    let soma_massas_anteriores = 0
-    for(let i = 0; i < blocoEscolhido; i++) {
-        soma_massas_anteriores += Number(corposSistema[i]['Massa'])
+    if (blocoEscolhido < corposSistema.length && blocoEscolhido > 0) {
+        let soma_massas_anteriores = 0
+        for(let i = 0; i < blocoEscolhido; i++) {
+            soma_massas_anteriores += Number(corposSistema[i]['Massa'])
+        }
+        tracao_n = soma_massas_anteriores*aceleracao
+        document.querySelector("#resultadoTracao").innerHTML = `Tração na corda ${blocoEscolhido} = ${tracao_n.toFixed(2)}N`
+    } else {
+        swal("Corda inválida")
     }
-    tracao_n = soma_massas_anteriores*aceleracao
-    document.querySelector("#resultadoTracao").innerHTML = `Tração no fio que está a frente do bloco ${blocoEscolhido} = ${tracao_n.toFixed(2)}N`
 }
 function explicacaoSistemas(sistema) {
     if (sistema == 'sistema1') {
