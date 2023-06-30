@@ -15,6 +15,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    overflow-x: hidden;
 }
 
 header {
@@ -155,3 +156,27 @@ h4 {
         max-height: 50vh;
     }
   }
+
+.resultado {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.tracoes_container p{
+    padding: 0;
+    margin: 5px 0;
+}
+
+.tracoes_container .inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.tracoes_container .inputContainer label{
+    margin: 10px;
+}

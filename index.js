@@ -1,5 +1,6 @@
 let possui_atrito = false
 let coef_atrito_escolhido = 'Nenhum'
+let primeiro_termo_razao = []
 function mudarSistema() {
     document.querySelector(".inputsEntradas").innerHTML = ``
     document.querySelector(".resultado ").innerHTML = ``
@@ -73,7 +74,7 @@ function adicionarBlocos() {
             document.querySelector("#sistemas").innerHTML = `<div class="containerSistema1">
                 <div class="containerBlocos">
                     <div class="block" id="block1">1</div>
-                    <div class="rope"></div>
+                    <div class="rope"><div class="rope">Corda 1</div></div>
                     <div class="block" id="block2">2</div>
                 </div>
             </div>`
@@ -82,7 +83,7 @@ function adicionarBlocos() {
                 for(i = quantidade_blocos_atual+1; i <= quantidade_blocos; i++) {
                     if (document.querySelector('#sistemSelector').value == 'sistema1') {
                         document.querySelector(".containerBlocos").innerHTML += `
-                            <div class="rope"></div>
+                            <div class="rope">Corda ${i-1}</div>
                             <div class="block" id="block${i}">${i}</div>`
                     }
                 }
@@ -95,7 +96,7 @@ function adicionarBlocos() {
                 for(i = quantidade_blocos_atual+1; i <= 200; i++) {
                     if (document.querySelector('#sistemSelector').value == 'sistema1') {
                         document.querySelector(".containerBlocos").innerHTML += `
-                            <div class="rope"></div>
+                            <div class="rope">Corda ${i-1}</div>
                             <div class="block" id="block${i}">${i}</div>`
                     }
                 }
@@ -121,6 +122,7 @@ function criarBotoes() {
 
 function possuirAtrito(opcao, sistema){
     let quantidade_blocos = document.querySelector("#qntdSistema").value
+    document.querySelector(".resultado").innerHTML = ``
     if (opcao == 'Sim') {
         possui_atrito = true
         if (sistema == 'sistema1') {
@@ -235,7 +237,13 @@ function possuirAtrito(opcao, sistema){
                     <button class="buttonCalc" onclick="calcularSistema()" id='buttonCalcularSistema1'>Calcular</button>`
                 }
                 for(i = 0; i < quantidade_blocos; i++) {
-                    document.querySelector(`#massa${i+1}`).value = corposSistema[i]['Massa']
+                    if (document.querySelector(`#massa${i+1}`)) {
+                        document.querySelector(`#massa${i+1}`).value = corposSistema[i]['Massa']
+                    }
+                }
+                if (document.querySelector("#primeiro_termo")) {
+                    document.querySelector("#primeiro_termo").value = primeiro_termo_razao[0]
+                    document.querySelector("#razao").value = primeiro_termo_razao[1]
                 }
             });
         } else if (sistema == 'sistema2') {
@@ -610,10 +618,11 @@ function possuirAtrito(opcao, sistema){
                 gravidadeInput.parentNode.remove();
             }
 
-            // Verificar se o botão de calcular existe e removê-lo
             const buttonCalc = inputsContainer.querySelector("#buttonCalcularSistema1");
             if (buttonCalc) {
                 buttonCalc.remove();
+            }
+            if (document.querySelector("#razao") && document.querySelector("#primeiro_termo")) {
             }
             document.querySelector(".inputsEntradas").innerHTML += `
                 <div class="inputContainer">
@@ -626,7 +635,13 @@ function possuirAtrito(opcao, sistema){
                 </div>
                 <button class="buttonCalc" onclick="calcularSistema()" id='buttonCalcularSistema1'>Calcular</button>`
             for(i = 0; i < quantidade_blocos; i++) {
-                document.querySelector(`#massa${i+1}`).value = corposSistema[i]['Massa']
+                if (document.querySelector(`#massa${i+1}`)) {
+                    document.querySelector(`#massa${i+1}`).value = corposSistema[i]['Massa']
+                }
+            }
+            if (document.querySelector("#primeiro_termo")) {
+                document.querySelector("#primeiro_termo").value = primeiro_termo_razao[0]
+                document.querySelector("#razao").value = primeiro_termo_razao[1]
             }
         }
         if (sistema == 'sistema2') {
@@ -738,7 +753,7 @@ function inputsPAPG() {
     criarBotoes()   
     document.querySelector(".inputsEntradas").innerHTML += `
         <h4>Selecione o tipo da progressão de massa desejada para os blocos </h4>
-        <select id="tipoPAPG">
+        <select id="tipoPAPG" onchange='inputsPAPG()'>
             <option value="none">Selecione a progressão</option>
             <option value="pa">Progressão Aritmética</option>
             <option value="pg">Progressão Geométrica</option>
@@ -751,7 +766,7 @@ function inputsPAPG() {
         <option value="pg">Progressão Geométrica</option>`
         document.querySelector(".inputsEntradas").innerHTML += `
         <div class="inputContainer">
-            <label for="primeiro_termo">Primeiro Termo</label>
+            <label for="primeiro_termo">Massa do Primeiro Bloco</label>
             <input type="number" id="primeiro_termo">
         </div>
         <div class="inputContainer">
@@ -770,7 +785,7 @@ function inputsPAPG() {
         </div>
         <div class="inputContainer">
             <label for="razao">Razão</label>
-            <input type="number" id="razao">
+            <input type="number" id="razao" >
         </div>
         <button class="buttonCalc" onclick="calcularMassasPAPG('${progressao}')">Atualizar Massas</button>`
     } else if (progressao == "none"){
@@ -783,6 +798,8 @@ function calcularMassasPAPG(progressao) {
     let quantidade_blocos = Number(document.querySelector("#qntdSistema").value)
     let primeiro_termo = Number(document.querySelector("#primeiro_termo").value)
     let razao = Number(document.querySelector("#razao").value)
+    primeiro_termo_razao[0] = primeiro_termo
+    primeiro_termo_razao[1] = razao
     corposSistema = []
     if (progressao == "pa") {
         corpo = {
@@ -790,17 +807,21 @@ function calcularMassasPAPG(progressao) {
             "Massa": primeiro_termo
         }
         corposSistema.push(corpo)
-        for(i = 2; i <= quantidade_blocos; i++) {
-            massa_bloco_atual = primeiro_termo + razao * (i-1);
-            if (massa_bloco_atual > 0) {
-                corpo = {
-                    "Nome":`Bloco ${i}`,
-                    "Massa": massa_bloco_atual
+        if (razao >= 0) {
+            for(i = 2; i <= quantidade_blocos; i++) {
+                massa_bloco_atual = primeiro_termo + razao * (i-1);
+                if (massa_bloco_atual > 0) {
+                    corpo = {
+                        "Nome":`Bloco ${i}`,
+                        "Massa": massa_bloco_atual
+                    }
+                    corposSistema.push(corpo)
+                } else {
+                    swal(`Primeira massa inválida`);
                 }
-                corposSistema.push(corpo)
-            } else {
-                swal(`Massa do bloco ${i} inválida`);
             }
+        } else {
+            swal('Razão Inválida')
         }
         document.querySelector("#razao").value = razao
         document.querySelector("#primeiro_termo").value = primeiro_termo
@@ -811,13 +832,15 @@ function calcularMassasPAPG(progressao) {
             <button onclick="possuirAtrito('Sim', 'sistema1')" id="buttonAtritoSim">Sim</button>
             <button onclick="possuirAtrito('Não', 'sistema1')" id="buttonAtritoNao">Não</button></div>`
         }
+        document.querySelector("#primeiro_termo").value = primeiro_termo_razao[0]
+        document.querySelector("#razao").value = primeiro_termo_razao[1]
     } else if (progressao == 'pg') {
-        if (progressao == "pa") {
-            corpo = {
-                "Nome":`Bloco 1`,
-                "Massa": primeiro_termo
-            }
-            corposSistema.push(corpo)
+        corpo = {
+            "Nome":`Bloco 1`,
+            "Massa": primeiro_termo
+        }
+        corposSistema.push(corpo)
+        if (razao > 0) {
             for(i = 2; i <= quantidade_blocos; i++) {
                 massa_bloco_atual = primeiro_termo * Math.pow(razao, i-1);
                 if (massa_bloco_atual > 0) {
@@ -825,20 +848,23 @@ function calcularMassasPAPG(progressao) {
                         "Nome":`Bloco ${i}`,
                         "Massa": massa_bloco_atual
                     }
-                    console.log(corpo)
                     corposSistema.push(corpo)
                 } else {
-                    swal(`Massa do bloco ${i} inválida`);
+                    swal(`Primeira massa inválida`);
                 }
             }
-            if (document.getElementById("buttonAtritoSim") == null) {
-                document.querySelector(".inputsEntradas").innerHTML += `
-                <h4>Agora escolha se haverá atrito no sistema</h4>
-                <div class='buttonsAtritos'>
-                <button onclick="possuirAtrito('Sim', 'sistema1')" id="buttonAtritoSim">Sim</button>
-                <button onclick="possuirAtrito('Não', 'sistema1')" id="buttonAtritoNao">Não</button></div>`
-            }
+        } else {
+            swal(`Razão inválida`);
         }
+        if (document.getElementById("buttonAtritoSim") == null) {
+            document.querySelector(".inputsEntradas").innerHTML += `
+            <h4>Agora escolha se haverá atrito no sistema</h4>
+            <div class='buttonsAtritos'>
+            <button onclick="possuirAtrito('Sim', 'sistema1')" id="buttonAtritoSim">Sim</button>
+            <button onclick="possuirAtrito('Não', 'sistema1')" id="buttonAtritoNao">Não</button></div>`
+        }
+        document.querySelector("#primeiro_termo").value = primeiro_termo_razao[0]
+        document.querySelector("#razao").value = primeiro_termo_razao[1]
     }
 }
 
@@ -898,8 +924,9 @@ function calcularSistema() {
                         <div class="inputContainer">
                             <label for="tracao_bloco_n">Tração no Bloco</label>
                             <input type="number" id="tracao_bloco_n">
-                            <button onclick="calcularTracaoSistema1()" class="buttonCalc">Sim</button>
+                            <button onclick="calcularTracaoSistema1(${aceleracao})" class="buttonCalc">Calcular Tração</button>
                         </div>
+                        <div id='resultadoTracao'></div>
                     </div>
                 `
             } else if (gravidade <= 0 && forca <= 0) {
@@ -979,7 +1006,63 @@ function calcularSistema() {
         }
     } else if (possui_atrito == true) {
         let continuar = true
-        if (n_sistema == 'sistema2') {
+        if (n_sistema == 'sistema1') {
+            let coef_atrito_estatico = 0
+            let coef_atrito_dinamico = 0
+            if (!document.getElementById('coef_atrito_dinamico') && document.getElementById('coef_atrito_estatico')) {
+                coef_atrito_estatico = Number(document.querySelector(`#coef_atrito_estatico`).value)
+                coef_atrito_dinamico = coef_atrito_estatico-(coef_atrito_estatico*0.10)
+                continuar = true
+            } else if (document.getElementById('coef_atrito_dinamico') && !document.getElementById('coef_atrito_estatico')) {
+                coef_atrito_dinamico = Number(document.querySelector(`#coef_atrito_dinamico`).value)
+                coef_atrito_estatico = (coef_atrito_dinamico*0.10)+coef_atrito_dinamico
+                continuar = true
+            } else if (document.getElementById('coef_atrito_dinamico') && document.getElementById('coef_atrito_estatico')) {
+                coef_atrito_dinamico = Number(document.querySelector(`#coef_atrito_dinamico`).value)
+                coef_atrito_estatico = Number(document.querySelector(`#coef_atrito_estatico`).value)
+                if (coef_atrito_dinamico > 0) {
+                    if (coef_atrito_dinamico >= coef_atrito_estatico) {
+                        swal("O coeficiente de atrito dinâmico não pode ser maior ou igual que o estático")
+                        continuar = false
+                    } else {
+                        continuar = true
+                    }
+
+                }
+            }
+            if (continuar == true) {
+                let soma_massas = 0
+                let quantidade_blocos = document.querySelector("#qntdSistema").value
+                let gravidade = Number(document.querySelector(`#gravidade`).value)
+                let forca = Number(document.querySelector(`#forca`).value)
+                if (gravidade > 0 && forca > 0) {
+                    for(let i = 0; i < quantidade_blocos; i++) {
+                        soma_massas += Number(corposSistema[i]['Massa'])
+                    }
+                    let forca_atrito_dinamico_total = soma_massas*gravidade*coef_atrito_dinamico
+                    let aceleracao = (forca-forca_atrito_dinamico_total)/soma_massas
+                    document.querySelector(".resultado").innerHTML = `
+                        <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
+                        <div class="tracoes_container">
+                            <p>Escolha um bloco que deseja ver a(s) força(s) de tração aplicadas nele.</p>
+                            <div class="inputContainer">
+                                <label for="tracao_bloco_n">Tração na Corda de n°</label>
+                                <input type="number" id="tracao_bloco_n" placeholder="Digite aqui o número da corda">
+                                <button onclick="calcularTracaoSistema1(${aceleracao})" class="buttonCalc">Calcular Tração</button>
+                                <div id='resultadoTracao'></div>  
+                            </div>
+                        </div>
+                    `
+                } else if (gravidade <= 0 && forca <= 0) {
+                    swal("Força e gravidade inválidas")
+                } else if (gravidade <= 0) {
+                    swal("Gravidade inválida")
+                } else if (forca <= 0) {
+                    swal("Força inválida")
+                }
+            }
+            
+        } else if (n_sistema == 'sistema2') {
             let coef_atrito_estatico = 0
             let coef_atrito_dinamico = 0
             if (!document.getElementById('coef_atrito_dinamico') && document.getElementById('coef_atrito_estatico')) {
@@ -1007,8 +1090,7 @@ function calcularSistema() {
                 let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
                 let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
                 let gravidade = Number(document.querySelector(`#gravidade`).value)
-                let forca = Number(document.querySelector(`#forca`).value)
-                if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && massa_bloco_3 > 0 && gravidade > 0 && forca > 0 ) {
+                if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && gravidade > 0) {
                     let peso_bloco_1 = massa_bloco_1*gravidade
                     let peso_bloco_2 = massa_bloco_2*gravidade
                     let forca_atrito_estatico_maxA = coef_atrito_estatico*(peso_bloco_1)
@@ -1016,14 +1098,15 @@ function calcularSistema() {
                     let tracao = 0
                     if (peso_bloco_2 > forca_atrito_estatico_maxA) {
                         forca_atrito_dinamico = coef_atrito_dinamico*peso_bloco_1
-                        aceleracao = (peso_bloco_1-forca_atrito_dinamico_total)/(massa_bloco_1+massa_bloco_2)
-                        tracao = forca_atrito_dinamico_total+(massa_bloco_1*aceleracao)
+                        aceleracao = (peso_bloco_1-forca_atrito_dinamico)/(massa_bloco_1+massa_bloco_2)
+                        tracao = forca_atrito_dinamico+(massa_bloco_1*aceleracao)
                         document.querySelector(".resultado").innerHTML = `
                             <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
                             <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
                         `
                     } else if (peso_bloco_2 < forca_atrito_estatico_maxA) {
                         swal("A força de atrito no bloco A impediu que o sistema se movimentasse.")
+                        tracao = peso_bloco_2
                         document.querySelector(".resultado").innerHTML = `
                             <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
                             <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
@@ -1069,25 +1152,25 @@ function calcularSistema() {
                     let forca_atrito_estatico_maxA = coef_atrito_estatico*(peso_n_bloco_1)
                     let aceleracao = 0
                     let tracao = 0
-                    if (peso_bloco_2 < (peso_t_bloco_1+forca_atrito_estatico_maxA) && peso_t_bloco_1 > forca_atrito_estatico_maxA) {
+                    if (peso_bloco_2 < peso_t_bloco_1) {
                         forca_atrito_dinamico = coef_atrito_dinamico*peso_n_bloco_1
-                        aceleracao = (peso_t_bloco_1-forca_atrito_dinamico-peso_bloco_2)/(massa_bloco_1+massa_bloco_2)
+                        aceleracao = (peso_t_bloco_1-peso_bloco_2-forca_atrito_dinamico)/(massa_bloco_1+massa_bloco_2)
                         tracao = peso_bloco_2+(massa_bloco_2*aceleracao)
                         swal(`Bloco 1 descendo`)
                         document.querySelector(".resultado").innerHTML = `
                             <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
                             <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
                         `
-                    } else if (peso_bloco_2 > (peso_t_bloco_1+forca_atrito_estatico_maxA) && peso_t_bloco_1 > forca_atrito_estatico_maxA) {
+                    } else if (peso_bloco_2 > peso_t_bloco_1) {
                         forca_atrito_dinamico = coef_atrito_dinamico*peso_n_bloco_1
-                        aceleracao = (peso_bloco_2-forca_atrito_dinamico-peso_t_bloco_1)/(massa_bloco_1+massa_bloco_2)
+                        aceleracao = (peso_bloco_2-peso_t_bloco_1-forca_atrito_dinamico)/(massa_bloco_1+massa_bloco_2)
                         tracao = peso_bloco_2+(massa_bloco_2*aceleracao)
                         swal(`Bloco 2 descendo`)
                         document.querySelector(".resultado").innerHTML = `
                             <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
                             <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
                         `
-                    } else if (peso_bloco_2 == (peso_t_bloco_1+forca_atrito_estatico_maxA)) {
+                    } else if (peso_bloco_2 == peso_t_bloco_1) {
                         swal("O sistema está em repouso!")
                         aceleracao = 0
                         tracao = 0
@@ -1169,6 +1252,15 @@ function calcularSistema() {
     }
 }
 
+function calcularTracaoSistema1(aceleracao) {
+    blocoEscolhido = document.querySelector("#tracao_bloco_n").value
+    let soma_massas_anteriores = 0
+    for(let i = 0; i < blocoEscolhido; i++) {
+        soma_massas_anteriores += Number(corposSistema[i]['Massa'])
+    }
+    tracao_n = soma_massas_anteriores*aceleracao
+    document.querySelector("#resultadoTracao").innerHTML = `Tração no fio que está a frente do bloco ${blocoEscolhido} = ${tracao_n.toFixed(2)}N`
+}
 function explicacaoSistemas(sistema) {
     if (sistema == 'sistema1') {
 
