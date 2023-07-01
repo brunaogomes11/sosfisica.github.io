@@ -982,7 +982,7 @@ function calcularSistema() {
             let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
             let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
             let gravidade = Number(document.querySelector(`#gravidade`).value)
-            let peso_t_bloco_1 = massa_bloco_1*gravidade*Math.sin(angulo)
+            let peso_t_bloco_1 = massa_bloco_1*gravidade*Math.sin(angulo*(Math.PI / 180))
             let peso_bloco_2 = massa_bloco_2*gravidade
             let aceleracao = 0
             let tracao = 0
