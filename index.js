@@ -949,69 +949,85 @@ function calcularSistema() {
             let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
             let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
             let gravidade = Number(document.querySelector(`#gravidade`).value)
-            let peso_bloco_1 = massa_bloco_1*gravidade
-            let peso_bloco_2 = massa_bloco_2*gravidade
-            let aceleracao = (peso_bloco_2)/(massa_bloco_1 + massa_bloco_2)
-            let tracao = peso_bloco_2-(massa_bloco_2*aceleracao)
-            document.querySelector(".resultado").innerHTML = `
-                <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
-                <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
-            `
+            if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && gravidade > 0) {
+                let peso_bloco_1 = massa_bloco_1*gravidade
+                let peso_bloco_2 = massa_bloco_2*gravidade
+                let aceleracao = (peso_bloco_2)/(massa_bloco_1 + massa_bloco_2)
+                let tracao = peso_bloco_2-(massa_bloco_2*aceleracao)
+                document.querySelector(".resultado").innerHTML = `
+                    <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
+                    <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
+                `
+            } else if (massa_bloco_1 <= 0 || massa_bloco_2 <= 0 || gravidade <= 0){
+                swal("Alguma entrada está inválida!\nPor favor procure qual das entradas é menor ou igual a 0 e corrija-a")
+            }
         } else if (n_sistema == 'sistema3') {
             let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
             let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
             let gravidade = Number(document.querySelector(`#gravidade`).value)
-            let peso_bloco_1 = massa_bloco_1*gravidade
-            let peso_bloco_2 = massa_bloco_2*gravidade
-            let aceleracao = 0
-            let tracao = 0
-            if(peso_bloco_1 > peso_bloco_2) {
-                aceleracao = (peso_bloco_1-peso_bloco_2)/(massa_bloco_1 + massa_bloco_2)
-                tracao = peso_bloco_1-(massa_bloco_1*aceleracao)
-                
-            } else {
-                aceleracao = (peso_bloco_2-peso_bloco_1)/(massa_bloco_1 + massa_bloco_2)
-                tracao = peso_bloco_2-(massa_bloco_2*aceleracao)
+            if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && gravidade > 0) {
+                let peso_bloco_1 = massa_bloco_1*gravidade
+                let peso_bloco_2 = massa_bloco_2*gravidade
+                let aceleracao = 0
+                let tracao = 0
+                if(peso_bloco_1 > peso_bloco_2) {
+                    aceleracao = (peso_bloco_1-peso_bloco_2)/(massa_bloco_1 + massa_bloco_2)
+                    tracao = peso_bloco_1-(massa_bloco_1*aceleracao)
+                    
+                } else {
+                    aceleracao = (peso_bloco_2-peso_bloco_1)/(massa_bloco_1 + massa_bloco_2)
+                    tracao = peso_bloco_2-(massa_bloco_2*aceleracao)
+                }
+                document.querySelector(".resultado").innerHTML = `
+                    <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
+                    <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
+                `
+            } else if (massa_bloco_1 <= 0 || massa_bloco_2 <= 0 || gravidade <= 0){
+                swal("Alguma entrada está inválida!\nPor favor procure qual das entradas é menor ou igual a 0 e corrija-a")
             }
-            document.querySelector(".resultado").innerHTML = `
-                <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
-                <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
-            `
         } else if (n_sistema == 'sistema4') {
             let angulo = Number(document.querySelector(`#angulo`).value)
             let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
             let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
             let gravidade = Number(document.querySelector(`#gravidade`).value)
-            let peso_t_bloco_1 = massa_bloco_1*gravidade*Math.sin(angulo*(Math.PI / 180))
-            let peso_bloco_2 = massa_bloco_2*gravidade
-            let aceleracao = 0
-            let tracao = 0
-            if(peso_t_bloco_1 > peso_bloco_2) {
-                aceleracao = (peso_t_bloco_1-peso_bloco_2)/(massa_bloco_1 + massa_bloco_2)
-                tracao = peso_t_bloco_1-(massa_bloco_1*aceleracao)
-                
-            } else {
-                aceleracao = (peso_bloco_2-peso_t_bloco_1)/(massa_bloco_1 + massa_bloco_2)
-                tracao = peso_bloco_2-(massa_bloco_2*aceleracao)
+            if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && gravidade > 0) {
+                let peso_t_bloco_1 = massa_bloco_1*gravidade*Math.sin(angulo*(Math.PI / 180))
+                let peso_bloco_2 = massa_bloco_2*gravidade
+                let aceleracao = 0
+                let tracao = 0
+                if(peso_t_bloco_1 > peso_bloco_2) {
+                    aceleracao = (peso_t_bloco_1-peso_bloco_2)/(massa_bloco_1 + massa_bloco_2)
+                    tracao = peso_t_bloco_1-(massa_bloco_1*aceleracao)
+                    
+                } else {
+                    aceleracao = (peso_bloco_2-peso_t_bloco_1)/(massa_bloco_1 + massa_bloco_2)
+                    tracao = peso_bloco_2-(massa_bloco_2*aceleracao)
+                }
+                document.querySelector(".resultado").innerHTML = `
+                    <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
+                    <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
+                `
+            } else if (massa_bloco_1 <= 0 || massa_bloco_2 <= 0 || gravidade <= 0){
+                swal("Alguma entrada está inválida!\nPor favor procure qual das entradas é menor ou igual a 0 e corrija-a")
             }
-            document.querySelector(".resultado").innerHTML = `
-                <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
-                <span class="resultadoText">Tração: ${tracao.toFixed(2)} N</span>
-            `
         } else if (n_sistema == 'sistema5') {
             let forca = Number(document.querySelector(`#forca`).value)
             let massa_bloco_1 = Number(document.querySelector(`#massa1`).value)
             let massa_bloco_2 = Number(document.querySelector(`#massa2`).value)
             let massa_bloco_3 = Number(document.querySelector(`#massa3`).value)
             let gravidade = Number(document.querySelector(`#gravidade`).value)
-            let aceleracao = (forca)/(massa_bloco_1 + massa_bloco_2 + massa_bloco_3)                
-            let forca_ab = forca-(massa_bloco_1*aceleracao)
-            let forca_bc = massa_bloco_3*aceleracao
-            document.querySelector(".resultado").innerHTML = `
-                <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
-                <span class="resultadoText">Força entre os blocos A e B: ${forca_ab.toFixed(2)} N</span><br>
-                <span class="resultadoText">Força entre os blocos B e C: ${forca_bc.toFixed(2)} N</span>
-            `
+            if (massa_bloco_1 > 0 && massa_bloco_2 > 0 && massa_bloco_3 > 0 && gravidade > 0 && forca > 0 ) {
+                let aceleracao = (forca)/(massa_bloco_1 + massa_bloco_2 + massa_bloco_3)                
+                let forca_ab = forca-(massa_bloco_1*aceleracao)
+                let forca_bc = massa_bloco_3*aceleracao
+                document.querySelector(".resultado").innerHTML = `
+                    <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
+                    <span class="resultadoText">Força entre os blocos A e B: ${forca_ab.toFixed(2)} N</span><br>
+                    <span class="resultadoText">Força entre os blocos B e C: ${forca_bc.toFixed(2)} N</span>
+                `
+            } else if (massa_bloco_1 <= 0 || massa_bloco_2 <= 0 || massa_bloco_3 <= 0 || gravidade <= 0 || forca <= 0 ){
+                swal("Alguma entrada está inválida!\nPor favor procure qual das entradas é menor ou igual a 0 e corrija-a")
+            }
         }
     } else if (possui_atrito == true) {
         let continuar = true
@@ -1239,8 +1255,8 @@ function calcularSistema() {
                         forca_bc = (coef_atrito_dinamico*(peso_bloco_2))+(massa_bloco_3*aceleracao)
                         document.querySelector(".resultado").innerHTML = `
                             <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
-                            <span class="resultadoText">Força entre os blocos A e B: ${forca_ab.toFixed(2)} N</span><br>
-                            <span class="resultadoText">Força entre os blocos B e C: ${forca_bc.toFixed(2)} N</span>
+                            <span class="resultadoText">Força entre os blocos 1 e 2: ${forca_ab.toFixed(2)} N</span><br>
+                            <span class="resultadoText">Força entre os blocos 2 e 3: ${forca_bc.toFixed(2)} N</span>
                         `
                     } else if (forca < (forca_atrito_estatico_maxA+forca_atrito_estatico_maxB+forca_atrito_estatico_maxC)){
                         aceleracao = 0
@@ -1249,8 +1265,8 @@ function calcularSistema() {
                         swal("Força aplicada menor que a força de atrito total do sistema! O sistema não se movimentou")
                         document.querySelector(".resultado").innerHTML = `
                             <span class="resultadoText">Aceleração: ${aceleracao.toFixed(2)} m/s²</span><br>
-                            <span class="resultadoText">Força entre os blocos A e B: ${forca_ab.toFixed(2)} N</span><br>
-                            <span class="resultadoText">Força entre os blocos B e C: ${forca_bc.toFixed(2)} N</span>
+                            <span class="resultadoText">Força entre os blocos 1 e 2: ${forca_ab.toFixed(2)} N</span><br>
+                            <span class="resultadoText">Força entre os blocos 2 e 3: ${forca_bc.toFixed(2)} N</span>
                         `
                     }
                 } else if (massa_bloco_1 <= 0 || massa_bloco_2 <= 0 || massa_bloco_3 <= 0 || gravidade <= 0 || forca <= 0 ){
