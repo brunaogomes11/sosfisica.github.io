@@ -25,7 +25,7 @@ function mudarSistema() {
     } else if (document.querySelector('#sistemSelector').value == 'sistema3') {
         document.querySelector("#quantidadeBlocosSistema1").style.display = 'none'
         document.querySelector("#sistemas").innerHTML = `<div class="containerSistema">
-            <img src='../imagens/sistema3.jpg' class="imagemSistema">
+            <img src='../imagens/sistema3.png' class="imagemSistema">
         </div>`
         document.querySelector(".inputsEntradas").innerHTML = `
                 <div class="inputContainer">
