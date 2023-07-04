@@ -22,6 +22,7 @@ function mudarSistema() {
         <button onclick="possuirAtrito('Sim', 'sistema2')" id="buttonAtritoSim">Sim</button>
         <button onclick="possuirAtrito('Não', 'sistema2')" id="buttonAtritoNao">Não</button></div>`
         document.querySelector("#qntdSistema").value = null
+        explicacaoSistemas('sistema2')
     } else if (document.querySelector('#sistemSelector').value == 'sistema3') {
         document.querySelector("#quantidadeBlocosSistema1").style.display = 'none'
         document.querySelector("#sistemas").innerHTML = `<div class="containerSistema">
@@ -42,6 +43,7 @@ function mudarSistema() {
                 </div>
                 <button class="buttonCalc" onclick="calcularSistema()">Calcular</button>`
         document.querySelector("#qntdSistema").value = null
+        explicacaoSistemas('sistema3')
     } else if (document.querySelector('#sistemSelector').value == 'sistema4') {
         document.querySelector("#quantidadeBlocosSistema1").style.display = 'none'
         document.querySelector("#sistemas").innerHTML = `<div class="containerSistema">
@@ -52,6 +54,7 @@ function mudarSistema() {
         <button onclick="possuirAtrito('Sim', 'sistema4')" id="buttonAtritoSim">Sim</button>
         <button onclick="possuirAtrito('Não', 'sistema4')" id="buttonAtritoNao">Não</button></div>`
         document.querySelector("#qntdSistema").value = null
+        explicacaoSistemas('sistema4')
     } else if (document.querySelector('#sistemSelector').value == 'sistema5') {
         document.querySelector("#quantidadeBlocosSistema1").style.display = 'none'
         document.querySelector("#sistemas").innerHTML = `<div class="containerSistema">
@@ -62,6 +65,7 @@ function mudarSistema() {
         <button onclick="possuirAtrito('Sim', 'sistema5')" id="buttonAtritoSim">Sim</button>
         <button onclick="possuirAtrito('Não', 'sistema5')" id="buttonAtritoNao">Não</button></div>`
         document.querySelector("#qntdSistema").value = null
+        explicacaoSistemas('sistema5')
     } else {
         document.querySelector("#quantidadeBlocosSistema1").style.display = 'none'
         document.querySelector("#sistemas").innerHTML = ``
@@ -1292,6 +1296,14 @@ function calcularTracaoSistema1(aceleracao) {
 }
 function explicacaoSistemas(sistema) {
     if (sistema == 'sistema1') {
-        swal("Sistema 1 faz isso assim assado")
+        swal("O Sistema 1 é um sistema de que esta na horizontal que tem uma quantidade minima de 2 blocos. Neste, os blocos estão ligados por cordas e o sistema está sendo puxado. Pedimos para você inserir a massas dos blocos manualmente ou por progreção aritmética ou Geométrica, perguntamos se vai haver atrito, se sim, você poderá escolher o tipo de coeficiente que você ira inserir, ou também se não haverá atrito, pedimos também para inserir a força que esta puxando o sistema e a gravidade , com isso podemos calcular a aceleração e a tração na corda requerida.")
+    } else if (sistema == 'sistema2') {
+        swal("O Sistema 2 é um sistema de polia com dois blocos, um em um plano horizontal e o outro  pendurado na vertical, sendo que o bloco vertical tende a puxar o bloco horizontal. Pedimos para que o usuário insira a massa de cada bloco, a gravidade desejada no sistema e selecionar se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o  valor. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.")
+    } else if (sistema == 'sistema3') {
+        swal("O Sistema 3 é um sistema de polia com dois blocos, ambos pendurados verticalmente, puxando um ao outro. Pedimos para que o usuário insira a massa de cada bloco e a gravidade desejada no sistema. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.")
+    } else if (sistema == 'sistema4') {
+        swal("O Sistema 4 é um sistema com dois blocos ligados por uma corda que passa em uma polia, um dos blocos é pendurado verticalmente e o outro está em um plano com uma determinada inclinação. Pedimos para que o usuário informe o ângulo da inclinação, a massa de cada bloco, a gravidade a ser aplicada ao sistema e se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o  valor. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.")
+    } else if (sistema == 'sistema5') {
+        swal("O Sistema 5 é um sistema com três blocos, no qual os três blocos estão encostados um no outro e é exercida uma determinada força em apenas um deles, de forma que empurre os outros. Pedimos que o usuário insira a força aplicada, a massa de cada um dos blocos, a gravidade desejada e se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o  valor. Por fim, será informada a aceleração do sistema e as forças presentes entre o bloco 1 e 2, bloco 2 e 3.")
     }
 }
