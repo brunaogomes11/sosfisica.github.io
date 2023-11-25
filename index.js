@@ -1249,39 +1249,39 @@ function explicacaoSistemas(sistema) {
         Swal.fire({
             html: `
                 <p>O Sistema 1 é um sistema de que esta na horizontal que tem uma quantidade minima de 2 blocos. Neste, os blocos estão ligados por cordas e o sistema está sendo puxado. Pedimos para você inserir a massas dos blocos manualmente ou por progreção aritmética ou Geométrica, perguntamos se vai haver atrito, se sim, você poderá escolher o tipo de coeficiente que você ira inserir, ou também se não haverá atrito, pedimos também para inserir a força que esta puxando o sistema e a gravidade , com isso podemos calcular a aceleração e a tração na corda requerida.</p>
-                <img src="../imagens/sistema1/sistema1.jpg" height="400px" width="400px">
-                <img src="../imagens/sistema1/equacao.png" height="400px" width="400px">
-                <img src="../imagens/sistema1/sistema2.jpg" height="400px" width="400px">
+                <img src="../imagens/sistema1/sistema1.jpg" style="max-width: 400px; max-height: 400px;">
+                <img src="../imagens/sistema1/equacao.png" style="max-width: 400px; max-height: 400px;">
+                <img src="../imagens/sistema1/sistema2.jpg" style="max-width: 400px; max-height: 400px;">
             `,
         });
     } else if (sistema == 'sistema2') {
         Swal.fire({
             html: `
                 <p>O Sistema 2 é um sistema de polia com dois blocos, um em um plano horizontal e o outro  pendurado na vertical, sendo que o bloco vertical tende a puxar o bloco horizontal. Pedimos para que o usuário insira a massa de cada bloco, a gravidade desejada no sistema e selecionar se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o  valor. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.</p>
-                <img src="../imagens/sistema2/sistema.jpg" height="400px" width="400px">
-                <img src="../imagens/sistema2/equacao.png" height="400px" width="400px">
+                <img src="../imagens/sistema2/sistema.jpg" style="max-width: 400px; max-height: 400px;">
+                <img src="../imagens/sistema2/equacao.png" style="max-width: 400px; max-height: 400px;">
             `,
         });
     } else if (sistema == 'sistema3') {
         Swal.fire({
             html: `
-                <p>O Sistema 3 é um sistema de polia com dois blocos, ambos pendurados verticalmente, puxando um ao outro. Pedimos para que o usuário insira a massa de cada bloco e a gravidade desejada no sistema. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.</p>
-                <img src="../imagens/sistema3/sistema.png" height="400px" width="400px">
-                <img src="../imagens/sistema3/equacao.png" height="400px" width="400px">
-            `,
+        <p>O Sistema 2 é um sistema de polia com dois blocos, um em um plano horizontal e o outro pendurado na vertical, sendo que o bloco vertical tende a puxar o bloco horizontal. Pedimos para que o usuário insira a massa de cada bloco, a gravidade desejada no sistema e selecionar se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o valor. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.</p>
+        <img src="../imagens/sistema2/sistema.jpg" style="max-width: 400px; max-height: 400px;">
+        <img src="../imagens/sistema2/equacao.png" style="max-width: 400px; max-height: 400px;">
+    `,
         });
     } else if (sistema == 'sistema4') {
         Swal.fire({
             html: `
                 <p>O Sistema 4 é um sistema com dois blocos ligados por uma corda que passa em uma polia, um dos blocos é pendurado verticalmente e o outro está em um plano com uma determinada inclinação. Pedimos para que o usuário informe o ângulo da inclinação, a massa de cada bloco, a gravidade a ser aplicada ao sistema e se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o  valor. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.</p>
-                <img src="../imagens/sistema4/sistema.jpg" height="400px" width="400px">
+                <img src="../imagens/sistema4/sistema.jpg" style="max-width: 400px; max-height: 400px;">
             `,
         });
     } else if (sistema == 'sistema5') {
         Swal.fire({
             html: `
                 <p>O Sistema 5 é um sistema com três blocos, no qual os três blocos estão encostados um no outro e é exercida uma determinada força em apenas um deles, de forma que empurre os outros. Pedimos que o usuário insira a força aplicada, a massa de cada um dos blocos, a gravidade desejada e se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o  valor. Por fim, será informada a aceleração do sistema e as forças presentes entre o bloco 1 e 2, bloco 2 e 3.</p>
-                <img src="../imagens/sistema5/sistema.png" height="400px" width="400px">
+                <img src="../imagens/sistema5/sistema.png" style="max-width: 400px; max-height: 400px;">
             `,
         });
     }
