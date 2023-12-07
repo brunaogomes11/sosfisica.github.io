@@ -1252,6 +1252,8 @@ function explicacaoSistemas(sistema) {
                 <img src="../imagens/sistema1/sistema1.jpg" style="max-width: 400px; max-height: 400px;">
                 <img src="../imagens/sistema1/equacao.png" style="max-width: 400px; max-height: 400px;">
                 <img src="../imagens/sistema1/sistema2.jpg" style="max-width: 400px; max-height: 400px;">
+                <h1>Aula Explicativa</h1>
+                <iframe width="350" height="195" src="https://www.youtube.com/embed/6o0UP8BTF5Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             `,
         });
     } else if (sistema == 'sistema2') {
@@ -1260,14 +1262,18 @@ function explicacaoSistemas(sistema) {
                 <p>O Sistema 2 é um sistema de polia com dois blocos, um em um plano horizontal e o outro  pendurado na vertical, sendo que o bloco vertical tende a puxar o bloco horizontal. Pedimos para que o usuário insira a massa de cada bloco, a gravidade desejada no sistema e selecionar se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o  valor. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.</p>
                 <img src="../imagens/sistema2/sistema.jpg" style="max-width: 400px; max-height: 400px;">
                 <img src="../imagens/sistema2/equacao.png" style="max-width: 400px; max-height: 400px;">
+                <h1>Aula Explicativa</h1>
+                <iframe width="350" height="195" src="https://www.youtube.com/embed/B_K5VdjckWE?start=458" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             `,
         });
     } else if (sistema == 'sistema3') {
         Swal.fire({
             html: `
-        <p>O Sistema 2 é um sistema de polia com dois blocos, um em um plano horizontal e o outro pendurado na vertical, sendo que o bloco vertical tende a puxar o bloco horizontal. Pedimos para que o usuário insira a massa de cada bloco, a gravidade desejada no sistema e selecionar se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o valor. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.</p>
-        <img src="../imagens/sistema2/sistema.jpg" style="max-width: 400px; max-height: 400px;">
-        <img src="../imagens/sistema2/equacao.png" style="max-width: 400px; max-height: 400px;">
+        <p>O Sistema 3 é um sistema de polia com dois blocos, ambos na vertical vertical, um puxando o outro ou mantendo em equilíbrio. Então, será informada a aceleração do sistema e a tração na corda que liga os blocos.</p>
+        <img src="../imagens/sistema3/sistema.png" style="max-width: 400px; max-height: 400px;">
+        <img src="../imagens/sistema3/equacao.png" style="max-width: 400px; max-height: 400px;">
+        <h1>Aula Explicativa</h1>
+        <iframe width="350" height="195" src="https://www.youtube.com/embed/Ype8XNUP84s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     `,
         });
     } else if (sistema == 'sistema4') {
@@ -1275,6 +1281,8 @@ function explicacaoSistemas(sistema) {
             html: `
                 <p>O Sistema 4 é um sistema com dois blocos ligados por uma corda que passa em uma polia, um dos blocos é pendurado verticalmente e o outro está em um plano com uma determinada inclinação. Pedimos para que o usuário informe o ângulo da inclinação, a massa de cada bloco, a gravidade a ser aplicada ao sistema e se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o  valor. Por fim, será informada a aceleração do sistema e a tração na corda que liga os blocos.</p>
                 <img src="../imagens/sistema4/sistema.jpg" style="max-width: 400px; max-height: 400px;">
+                <h1>Aula Explicativa</h1>
+                <iframe width="350" height="195" src="https://www.youtube.com/embed/yt7b3s9NmWQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             `,
         });
     } else if (sistema == 'sistema5') {
@@ -1282,6 +1290,8 @@ function explicacaoSistemas(sistema) {
             html: `
                 <p>O Sistema 5 é um sistema com três blocos, no qual os três blocos estão encostados um no outro e é exercida uma determinada força em apenas um deles, de forma que empurre os outros. Pedimos que o usuário insira a força aplicada, a massa de cada um dos blocos, a gravidade desejada e se deseja atrito, caso a resposta seja “sim”, o mesmo deverá informar o tipo de atrito a inserir o  valor. Por fim, será informada a aceleração do sistema e as forças presentes entre o bloco 1 e 2, bloco 2 e 3.</p>
                 <img src="../imagens/sistema5/sistema.png" style="max-width: 400px; max-height: 400px;">
+                <h1>Aula Explicativa</h1>
+                <iframe width="350" height="195" src="https://www.youtube.com/embed/HYA4r6Hfb3c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             `,
         });
     }
